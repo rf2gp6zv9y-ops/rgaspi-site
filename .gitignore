@@ -160,3 +160,6 @@ pages/_studio/
 # Downloadable copy of the project sources for local development
 !public/site-source.zip
 
+# Runtime data: requests inbox, admin credentials, content backups
+/data/
+
