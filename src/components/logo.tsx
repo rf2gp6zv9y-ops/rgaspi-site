@@ -12,15 +12,15 @@ export function Logo({ className }: { className?: string }) {
     >
       <span
         aria-hidden="true"
-        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm bg-primary font-serif text-lg font-bold text-primary-foreground transition-colors group-hover:bg-primary/90"
+        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-sm bg-primary font-serif text-xl font-bold text-primary-foreground transition-colors group-hover:bg-primary/90"
       >
         Р
       </span>
       <span className="flex flex-col leading-tight">
-        <span className="font-serif text-lg font-bold tracking-tight text-foreground transition-colors group-hover:text-primary">
+        <span className="font-serif text-2xl font-bold tracking-tight text-foreground transition-colors group-hover:text-primary">
           РГАСПИ
         </span>
-        <span className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+        <span className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
           Архив социально-политической истории
         </span>
       </span>
