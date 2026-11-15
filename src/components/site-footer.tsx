@@ -86,6 +86,11 @@ export function SiteFooter() {
         <p className="text-xs text-muted-foreground">
           © {new Date().getFullYear()} {footer.copyright}
         </p>
+        <p className="mt-1 text-[10px] text-muted-foreground/50">
+          <Link href="/admin/login" className="hover:text-muted-foreground">
+            Администрирование
+          </Link>
+        </p>
       </div>
     </footer>
   );

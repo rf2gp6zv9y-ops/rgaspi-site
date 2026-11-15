@@ -16,6 +16,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Section, SectionHeading } from "@/components/page-sections";
+import { HeroCarousel } from "@/components/hero-carousel";
 import site from "./site.json";
 
 const sectionIcons = {
@@ -32,6 +33,18 @@ export default function HomePage() {
 
   return (
     <>
+      {/* News Carousel */}
+      <section className="border-b border-border bg-secondary/30">
+        <div className="container pb-4 pt-2">
+          <SectionHeading
+            title={home.newsTitle}
+            text={home.newsText}
+          />
+        </div>
+        <HeroCarousel news={home.news} autoPlayInterval={6000} />
+      </section>
+
+      {/* Hero */}
       <section className="border-b border-border bg-secondary/50">
         <div className="container grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-[1.1fr_0.9fr] lg:py-20">
           <div>
@@ -85,6 +98,7 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* About */}
       <Section>
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <SectionHeading title={home.aboutTitle} text={home.aboutText} />
@@ -101,6 +115,7 @@ export default function HomePage() {
         </div>
       </Section>
 
+      {/* Sections */}
       <section className="border-y border-border bg-secondary/40">
         <div className="container py-12 sm:py-16">
           <SectionHeading
@@ -137,16 +152,26 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* News Cards */}
       <Section>
         <SectionHeading title={home.newsTitle} text={home.newsText} />
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {home.news.map((item) => (
-            <Card key={item.title} className="flex flex-col">
-              <CardHeader>
-                <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            <Card key={item.title} className="group flex flex-col overflow-hidden">
+              <div className="relative aspect-[16/10]">
+                <Image
+                  src={item.image || "/images/hero.webp"}
+                  alt={item.title}
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                <p className="absolute bottom-3 left-3 text-xs font-semibold uppercase tracking-wider text-white">
                   {item.date}
                 </p>
-                <CardTitle className="mt-2 text-lg leading-snug">
+              </div>
+              <CardHeader>
+                <CardTitle className="text-lg leading-snug">
                   {item.title}
                 </CardTitle>
                 <CardDescription className="mt-2 leading-relaxed">
@@ -167,6 +192,7 @@ export default function HomePage() {
         </div>
       </Section>
 
+      {/* CTA */}
       <Section className="pb-16">
         <div className="rounded-xl border border-primary/25 bg-primary px-6 py-10 text-primary-foreground sm:px-10">
           <h2 className="font-serif text-2xl font-bold tracking-tight sm:text-3xl">

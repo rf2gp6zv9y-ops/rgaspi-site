@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Loader2, Send } from "lucide-react";
+import { CheckCircle2, Loader2, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -20,29 +20,35 @@ export function RequestForm({ email }: RequestFormProps) {
   const [done, setDone] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const mailto = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (sending) return;
 
-    const lines = [
-      `Имя: ${name.trim()}`,
-      `Контакт: ${contact.trim()}`,
-      "",
-      message.trim(),
-    ];
-
-    const url =
-      `mailto:${email}` +
-      `?subject=${encodeURIComponent(`Запрос в архив: ${topic.trim() || "без темы"}`)}` +
-      `&body=${encodeURIComponent(lines.join("\n"))}`;
-
     setSending(true);
     setError(null);
+
     try {
-      window.location.href = url;
+      const res = await fetch("/api/requests", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim(),
+          contact: contact.trim(),
+          topic: topic.trim(),
+          message: message.trim(),
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || "Произошла ошибка при отправке");
+        return;
+      }
+
       setDone(true);
     } catch {
-      setError("Не удалось открыть почтовую программу. Напишите нам вручную.");
+      setError("Не удалось отправить заявку. Попробуйте позже или напишите на " + email);
     } finally {
       setSending(false);
     }
@@ -50,32 +56,36 @@ export function RequestForm({ email }: RequestFormProps) {
 
   if (done) {
     return (
-      <div className="space-y-3">
-        <p className="text-sm leading-relaxed text-muted-foreground">
-          Почтовая программа должна открыться с готовым письмом — проверьте и
-          нажмите «Отправить». Если она не открылась,{" "}
-          <button
-            type="button"
-            onClick={() => setDone(false)}
-            className="font-medium text-primary underline-offset-2 hover:underline"
-          >
-            вернитесь к форме
-          </button>{" "}
-          или напишите на{" "}
-          <a
-            href={`mailto:${email}`}
-            className="font-medium text-primary hover:underline"
-          >
-            {email}
-          </a>{" "}
-          вручную.
-        </p>
+      <div className="space-y-4 text-center">
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30">
+          <CheckCircle2 className="h-8 w-8 text-green-600 dark:text-green-400" />
+        </div>
+        <div>
+          <p className="text-lg font-semibold">Заявка отправлена</p>
+          <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+            Спасибо за обращение! Сотрудники архива рассмотрят вашу заявку и
+            свяжутся с вами указанным контактом.
+          </p>
+        </div>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => {
+            setDone(false);
+            setName("");
+            setContact("");
+            setTopic("");
+            setMessage("");
+          }}
+        >
+          Отправить ещё одну заявку
+        </Button>
       </div>
     );
   }
 
   return (
-    <form onSubmit={mailto} className="space-y-4" noValidate={false}>
+    <form onSubmit={handleSubmit} className="space-y-4" noValidate={false}>
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">
           <Label htmlFor="request-name">Ваше имя</Label>
@@ -137,19 +147,19 @@ export function RequestForm({ email }: RequestFormProps) {
         {sending ? (
           <>
             <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
-            Открываем почту…
+            Отправляем…
           </>
         ) : (
           <>
             <Send className="h-4 w-4" aria-hidden="true" />
-            Отправить по эл. почте
+            Отправить запрос
           </>
         )}
       </Button>
 
       <p className="text-xs leading-relaxed text-muted-foreground">
-        Письмо уйдёт на {email} из вашей почтовой программы — перед отправкой
-        можно проверить текст.
+        Заявка будет обработана сотрудниками архива. Мы свяжемся с вами по
+        указанному контакту.
       </p>
     </form>
   );

@@ -1,0 +1,43 @@
+"use server";
+
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
+import { verifyPassword, getSessionCookieName } from "@/lib/password";
+
+const SESSION_COOKIE = getSessionCookieName();
+
+export async function loginAction(formData: FormData) {
+  const password = formData.get("password") as string | null;
+  if (!password) {
+    return;
+  }
+
+  const valid = await verifyPassword(password);
+  if (!valid) {
+    return;
+  }
+
+  const cookieStore = await cookies();
+  cookieStore.set(SESSION_COOKIE, "1", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    maxAge: 60 * 60 * 8, // 8 часов
+    path: "/",
+  });
+
+  revalidatePath("/admin/requests");
+  redirect("/admin/requests");
+}
+
+export async function logoutAction() {
+  const cookieStore = await cookies();
+  cookieStore.delete(SESSION_COOKIE);
+  redirect("/admin/login");
+}
+
+export async function isAdmin(): Promise<boolean> {
+  const cookieStore = await cookies();
+  return cookieStore.get(SESSION_COOKIE)?.value === "1";
+}

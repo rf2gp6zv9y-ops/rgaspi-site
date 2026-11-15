@@ -106,14 +106,13 @@ export default function RequestsPage() {
               </h2>
             </div>
             <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
-              Заполните форму — почтовая программа откроется с готовым письмом
-              на адрес {site.contacts.requestEmail}. Останется проверить текст
-              и нажать «Отправить».
+              Заполните форму — ваша заявка будет отправлена напрямую в архив.
+              Сотрудники рассмотрят её и свяжутся с вами по указанному контакту.
             </p>
           </div>
           <Card>
             <CardContent className="pt-6">
-              <RequestForm email={site.contacts.requestEmail} />
+              <RequestForm email={site.contacts.email} />
             </CardContent>
           </Card>
         </div>
