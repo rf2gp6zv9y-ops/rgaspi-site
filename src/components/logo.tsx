@@ -1,14 +1,29 @@
-import Image from "next/image";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export function Logo({ className }: { className?: string }) {
   return (
-    <Image
-      src="/logo.svg"
-      alt="Giga Studio"
-      width={685}
-      height={78}
-      className={className}
-      priority
-    />
+    <Link
+      href="/"
+      className={cn(
+        "group inline-flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm",
+        className
+      )}
+    >
+      <span
+        aria-hidden="true"
+        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm bg-primary font-serif text-lg font-bold text-primary-foreground transition-colors group-hover:bg-primary/90"
+      >
+        Р
+      </span>
+      <span className="flex flex-col leading-tight">
+        <span className="font-serif text-lg font-bold tracking-tight text-foreground transition-colors group-hover:text-primary">
+          РГАСПИ
+        </span>
+        <span className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+          Архив социально-политической истории
+        </span>
+      </span>
+    </Link>
   );
 }

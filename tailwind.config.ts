@@ -71,7 +71,8 @@ export default {
         },
       },
       fontFamily: {
-        sans: ["var(--font-geist-sans)", ...fontFamily.sans],
+        sans: ["var(--font-pt-sans)", ...fontFamily.sans],
+        serif: ["var(--font-pt-serif)", ...fontFamily.sans],
         mono: ["var(--font-geist-mono)", ...fontFamily.mono],
       },
       borderRadius: {

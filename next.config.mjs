@@ -11,6 +11,22 @@ const nextConfig = {
             // Allow any site to embed this page in an <iframe>
             value: "frame-ancestors *;",
           },
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
+          },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
+          },
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=31536000; includeSubDomains",
+          },
           // NOTE: X-Frame-Options is legacy and does not support a wildcard;
           // if your platform injects X-Frame-Options: SAMEORIGIN you may need
           // to remove/override it via platform settings.
