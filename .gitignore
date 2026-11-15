@@ -157,3 +157,6 @@ pages/_studio/
 *.tar.gz
 *.tar.xz
 
+# Downloadable copy of the project sources for local development
+!public/site-source.zip
+
