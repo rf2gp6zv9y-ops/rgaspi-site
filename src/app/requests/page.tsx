@@ -8,6 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { PageHeader, Section } from "@/components/page-sections";
+import { RequestForm } from "./request-form";
 import site from "../site.json";
 
 export const metadata: Metadata = {
@@ -94,6 +95,29 @@ export default function RequestsPage() {
           </Card>
         </div>
       </section>
+
+      <Section>
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+          <div>
+            <div className="flex items-center gap-3">
+              <Send className="h-6 w-6 text-primary" aria-hidden="true" />
+              <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+                Отправить запрос с сайта
+              </h2>
+            </div>
+            <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground">
+              Заполните форму — почтовая программа откроется с готовым письмом
+              на адрес {site.contacts.requestEmail}. Останется проверить текст
+              и нажать «Отправить».
+            </p>
+          </div>
+          <Card>
+            <CardContent className="pt-6">
+              <RequestForm email={site.contacts.requestEmail} />
+            </CardContent>
+          </Card>
+        </div>
+      </Section>
     </>
   );
 }
