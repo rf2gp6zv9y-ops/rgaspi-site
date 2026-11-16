@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { ScrollLink } from "@/components/scroll-link";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { Separator } from "@/components/ui/separator";
@@ -24,12 +24,12 @@ export function SiteFooter() {
           <ul className="mt-4 space-y-2.5">
             {nav.map((item) => (
               <li key={item.href}>
-                <Link
+                <ScrollLink
                   href={item.href}
                   className="text-sm text-muted-foreground transition-colors hover:text-primary"
                 >
                   {item.label}
-                </Link>
+                </ScrollLink>
               </li>
             ))}
           </ul>
@@ -87,9 +87,9 @@ export function SiteFooter() {
           © {new Date().getFullYear()} {footer.copyright}
         </p>
         <p className="mt-1 text-[10px] text-muted-foreground/50">
-          <Link href="/admin/login" className="hover:text-muted-foreground">
+          <ScrollLink href="/admin/login" className="hover:text-muted-foreground">
             Администрирование
-          </Link>
+          </ScrollLink>
         </p>
       </div>
     </footer>

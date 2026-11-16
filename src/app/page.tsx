@@ -52,7 +52,7 @@ export default function HomePage() {
 
         </div>
         < div className="container pb-4 pt-2">
-        <HeroCarousel news={home.news} autoPlayInterval={5000} />
+        <HeroCarousel news={home.news} autoPlayInterval={6000} />
         </div>
       </section>
       {/* Hero */}
@@ -165,9 +165,20 @@ export default function HomePage() {
 
       {/* News Cards */}
       <Section>
-        <SectionHeading title={home.newsTitle} text={home.newsText} />
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
-          {home.news.map((item) => (
+        <div className="flex items-end justify-between">
+          <SectionHeading title={home.newsTitle} text={home.newsText} />
+          {home.news.length > 6 && (
+            <Link
+              href="/news"
+              className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
+            >
+              Все новости
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          )}
+        </div>
+        <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {home.news.slice(0, 6).map((item) => (
             <Card key={item.title} className="group flex flex-col overflow-hidden">
               <div className="relative aspect-[16/10]">
                 <Image
@@ -201,6 +212,17 @@ export default function HomePage() {
             </Card>
           ))}
         </div>
+        {home.news.length > 6 && (
+          <div className="mt-6 text-right">
+            <Link
+              href="/news"
+              className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
+            >
+              Все новости
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        )}
       </Section>
 
       {/* CTA */}

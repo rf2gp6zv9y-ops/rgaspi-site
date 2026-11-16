@@ -1,9 +1,9 @@
-import Link from "next/link";
+import { ScrollLink } from "@/components/scroll-link";
 import { cn } from "@/lib/utils";
 
 export function Logo({ className }: { className?: string }) {
   return (
-    <Link
+    <ScrollLink
       href="/"
       className={cn(
         "group inline-flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm",
@@ -24,6 +24,6 @@ export function Logo({ className }: { className?: string }) {
           Архив социально-политической истории
         </span>
       </span>
-    </Link>
+    </ScrollLink>
   );
 }

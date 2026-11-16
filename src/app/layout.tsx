@@ -35,6 +35,9 @@ export const metadata: Metadata = {
     template: `%s | ${site.shortTitle}`,
   },
   description: site.description,
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
 
 export const viewport: Viewport = {

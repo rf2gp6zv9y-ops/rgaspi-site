@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { ScrollLink } from "@/components/scroll-link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu } from "lucide-react";
@@ -32,7 +32,7 @@ export function SiteHeader() {
           <ul className="flex items-center gap-1">
             {site.nav.map((item) => (
               <li key={item.href}>
-                <Link
+                <ScrollLink
                   href={item.href}
                   aria-current={isActive(item.href) ? "page" : undefined}
                   className={cn(
@@ -43,7 +43,7 @@ export function SiteHeader() {
                   )}
                 >
                   {item.label}
-                </Link>
+                </ScrollLink>
               </li>
             ))}
           </ul>
@@ -51,7 +51,7 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-2">
           <Button asChild className="hidden md:inline-flex" size="sm">
-            <Link href="/requests">Оформить запрос</Link>
+            <ScrollLink href="/requests">Оформить запрос</ScrollLink>
           </Button>
 
           <Sheet open={open} onOpenChange={setOpen}>
@@ -75,7 +75,7 @@ export function SiteHeader() {
                 <ul className="flex flex-col gap-1">
                   {site.nav.map((item) => (
                     <li key={item.href}>
-                      <Link
+                      <ScrollLink
                         href={item.href}
                         onClick={() => setOpen(false)}
                         aria-current={isActive(item.href) ? "page" : undefined}
@@ -87,7 +87,7 @@ export function SiteHeader() {
                         )}
                       >
                         {item.label}
-                      </Link>
+                      </ScrollLink>
                     </li>
                   ))}
                 </ul>
