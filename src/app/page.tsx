@@ -1,3 +1,4 @@
+// src/app/page.tsx
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -35,15 +36,25 @@ export default function HomePage() {
     <>
       {/* News Carousel */}
       <section className="border-b border-border bg-secondary/30">
-        <div className="container pb-4 pt-2">
-          <SectionHeading
-            title={home.newsTitle}
-            text={home.newsText}
-          />
-        </div>
-        <HeroCarousel news={home.news} autoPlayInterval={6000} />
-      </section>
+        <div className="container pb-2 pt-4">
 
+<div className="flex flex-wrap items-center gap-3 rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-sm leading-relaxed text-amber-900">
+  <span className="shrink-0 rounded bg-amber-400 px-2 py-0.5 text-xs font-bold uppercase tracking-wide text-amber-950">
+    Прототип
+  </span>
+  <span className="min-w-0 flex-1">
+    Это прототип сайта. Информация, новости и разделы носят демонстрационный характер и будут заменены на актуальные материалы.
+  </span>
+  <Button asChild variant="outline" size="sm" className="shrink-0">
+    <Link href="/requests#feedback">Оставить замечание или пожелание</Link>
+  </Button>
+</div>
+
+        </div>
+        < div className="container pb-4 pt-2">
+        <HeroCarousel news={home.news} autoPlayInterval={5000} />
+        </div>
+      </section>
       {/* Hero */}
       <section className="border-b border-border bg-secondary/50">
         <div className="container grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-[1.1fr_0.9fr] lg:py-20">

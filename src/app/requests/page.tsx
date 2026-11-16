@@ -1,3 +1,4 @@
+// src/app/request/page.tsx
 import type { Metadata } from "next";
 import { Info, Mail, Send } from "lucide-react";
 import {
@@ -88,7 +89,10 @@ export default function RequestsPage() {
               <p>Адрес приёмной: {site.contacts.address}</p>
               <p>Приёмная работает: {site.contacts.officeHours}</p>
               <div className="flex items-start gap-2 rounded-md bg-secondary p-3">
-                <Info className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+                <Info
+                  className="mt-0.5 h-4 w-4 shrink-0 text-primary"
+                  aria-hidden="true"
+                />
                 <p>{requests.note}</p>
               </div>
             </CardContent>
@@ -110,9 +114,13 @@ export default function RequestsPage() {
               Сотрудники рассмотрят её и свяжутся с вами по указанному контакту.
             </p>
           </div>
-          <Card>
+          <Card id="feedback">
             <CardContent className="pt-6">
-              <RequestForm email={site.contacts.email} />
+              <RequestForm
+                email={site.contacts.email}
+                defaultTopic="Замечание по прототипу сайта"
+                compact
+              />
             </CardContent>
           </Card>
         </div>

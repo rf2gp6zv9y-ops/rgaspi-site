@@ -1,3 +1,4 @@
+// src/app/request/request-form.tsx
 "use client";
 
 import { useState } from "react";
@@ -9,12 +10,14 @@ import { Textarea } from "@/components/ui/textarea";
 
 type RequestFormProps = {
   email: string;
+  defaultTopic?: string;
+  compact?: boolean;
 };
 
-export function RequestForm({ email }: RequestFormProps) {
+export function RequestForm({ email, defaultTopic, compact }: RequestFormProps) {
   const [name, setName] = useState("");
   const [contact, setContact] = useState("");
-  const [topic, setTopic] = useState("");
+  const [topic, setTopic] = useState(defaultTopic ?? "");
   const [message, setMessage] = useState("");
   const [sending, setSending] = useState(false);
   const [done, setDone] = useState(false);
@@ -32,7 +35,7 @@ export function RequestForm({ email }: RequestFormProps) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: name.trim(),
+          name: name.trim() || "Аноним",
           contact: contact.trim(),
           topic: topic.trim(),
           message: message.trim(),
@@ -48,7 +51,9 @@ export function RequestForm({ email }: RequestFormProps) {
 
       setDone(true);
     } catch {
-      setError("Не удалось отправить заявку. Попробуйте позже или напишите на " + email);
+      setError(
+        "Не удалось отправить заявку. Попробуйте позже или напишите на " + email
+      );
     } finally {
       setSending(false);
     }
@@ -61,10 +66,13 @@ export function RequestForm({ email }: RequestFormProps) {
           <CheckCircle2 className="h-8 w-8 text-green-600 dark:text-green-400" />
         </div>
         <div>
-          <p className="text-lg font-semibold">Заявка отправлена</p>
+          <p className="text-lg font-semibold">
+            {compact ? "Замечание отправлено" : "Заявка отправлена"}
+          </p>
           <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-            Спасибо за обращение! Сотрудники архива рассмотрят вашу заявку и
-            свяжутся с вами указанным контактом.
+            {compact
+              ? "Спасибо! Ваше замечание передано разработчику прототипа."
+              : "Спасибо за обращение! Сотрудники архива рассмотрят вашу заявку и свяжутся с вами указанным контактом."}
           </p>
         </div>
         <Button
@@ -74,11 +82,11 @@ export function RequestForm({ email }: RequestFormProps) {
             setDone(false);
             setName("");
             setContact("");
-            setTopic("");
+            setTopic(defaultTopic ?? "");
             setMessage("");
           }}
         >
-          Отправить ещё одну заявку
+          {compact ? "Оставить ещё одно замечание" : "Отправить ещё одну заявку"}
         </Button>
       </div>
     );
@@ -86,29 +94,39 @@ export function RequestForm({ email }: RequestFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4" noValidate={false}>
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className={compact ? "space-y-2" : "grid gap-4 sm:grid-cols-2"}>
+        {!compact && (
+          <div className="space-y-2">
+            <Label htmlFor="request-name">Ваше имя</Label>
+            <Input
+              id="request-name"
+              name="name"
+              autoComplete="name"
+              value={name}
+              onChange={(event) => setName(event.target.value)}
+              placeholder="Иван Иванов"
+              required
+            />
+          </div>
+        )}
         <div className="space-y-2">
-          <Label htmlFor="request-name">Ваше имя</Label>
-          <Input
-            id="request-name"
-            name="name"
-            autoComplete="name"
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-            placeholder="Иван Иванов"
-            required
-          />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="request-contact">Телефон или эл. почта</Label>
+          <Label htmlFor="request-contact">
+            {compact
+              ? "Контакт для ответа (необязательно)"
+              : "Телефон или эл. почта"}
+          </Label>
           <Input
             id="request-contact"
             name="contact"
             autoComplete="email"
             value={contact}
             onChange={(event) => setContact(event.target.value)}
-            placeholder="user@example.com"
-            required
+            placeholder={
+              compact
+                ? "user@example.com — если хотите получить ответ"
+                : "user@example.com"
+            }
+            required={!compact}
           />
         </div>
       </div>
@@ -125,14 +143,20 @@ export function RequestForm({ email }: RequestFormProps) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="request-message">Текст запроса</Label>
+        <Label htmlFor="request-message">
+          {compact ? "Текст замечания" : "Текст запроса"}
+        </Label>
         <Textarea
           id="request-message"
           name="message"
           rows={6}
           value={message}
           onChange={(event) => setMessage(event.target.value)}
-          placeholder="Опишите запрос: ФИО, даты, организация, период, что нужно подтвердить или найти"
+          placeholder={
+            compact
+              ? "Опишите, что стоит поправить или добавить на сайте"
+              : "Опишите запрос: ФИО, даты, организация, период, что нужно подтвердить или найти"
+          }
           required
         />
       </div>
@@ -152,14 +176,15 @@ export function RequestForm({ email }: RequestFormProps) {
         ) : (
           <>
             <Send className="h-4 w-4" aria-hidden="true" />
-            Отправить запрос
+            {compact ? "Отправить замечание" : "Отправить запрос"}
           </>
         )}
       </Button>
 
       <p className="text-xs leading-relaxed text-muted-foreground">
-        Заявка будет обработана сотрудниками архива. Мы свяжемся с вами по
-        указанному контакту.
+        {compact
+          ? "Замечание будет передано разработчику прототипа. Контакт нужен только если вы хотите получить ответ."
+          : "Заявка будет обработана сотрудниками архива. Мы свяжемся с вами по указанному контакту."}
       </p>
     </form>
   );

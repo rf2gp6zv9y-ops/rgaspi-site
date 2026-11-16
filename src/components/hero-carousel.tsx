@@ -61,7 +61,7 @@ export function HeroCarousel({ news, autoPlayInterval = 5000 }: HeroCarouselProp
             "absolute inset-0 transition-all duration-700 ease-in-out",
             index === activeIndex
               ? "opacity-100 scale-100"
-              : "opacity-0 scale-105"
+              : "opacity-0 scale-105 pointer-events-none"
           )}
         >
           {/* Background image */}
@@ -70,8 +70,9 @@ export function HeroCarousel({ news, autoPlayInterval = 5000 }: HeroCarouselProp
               src={item.image || "/images/hero.webp"}
               alt={item.title}
               fill
+              sizes="(max-width: 1280px) 100vw, 1280px"
               className="object-cover"
-              priority={index === 0}
+              loading={index === 0 ? "eager" : "lazy"}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/10" />
           </div>
@@ -110,7 +111,8 @@ export function HeroCarousel({ news, autoPlayInterval = 5000 }: HeroCarouselProp
       <button
         type="button"
         onClick={prev}
-        className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full border border-white/20 bg-black/30 p-2 text-white backdrop-blur-sm transition-colors hover:bg-black/50"
+        //className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full border border-white/20 bg-black/30 p-2 text-white backdrop-blur-sm transition-colors hover:bg-black/50"
+        className="absolute bottom-6 left-4 rounded-full border border-white/15 bg-black/10 p-2 text-white/70 backdrop-blur-[2px] transition-colors hover:bg-black/30 hover:text-white"
         aria-label="Предыдущая новость"
       >
         <ChevronLeft className="h-5 w-5" />
@@ -118,7 +120,8 @@ export function HeroCarousel({ news, autoPlayInterval = 5000 }: HeroCarouselProp
       <button
         type="button"
         onClick={next}
-        className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-white/20 bg-black/30 p-2 text-white backdrop-blur-sm transition-colors hover:bg-black/50"
+        //className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-white/20 bg-black/30 p-2 text-white backdrop-blur-sm transition-colors hover:bg-black/50"
+        className="absolute bottom-6 right-4 rounded-full border border-white/15 bg-black/10 p-2 text-white/70 backdrop-blur-[2px] transition-colors hover:bg-black/30 hover:text-white"
         aria-label="Следующая новость"
       >
         <ChevronRight className="h-5 w-5" />
