@@ -8,13 +8,13 @@
     "node": ">=24.0.0"
   },
   "scripts": {
-    "start": "next start -p 4000",
-    "format": "bunx prettier --write . --ignore-unknown",
-    "build": "next build",
     "dev": "next dev -p 4000",
+    "build": "next build --webpack --loglevel=error",
+    "start": "npx serve out",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "check": "bun run lint && bun run typecheck && bun run build"
+    "format": "npx prettier --write . --ignore-unknown",
+    "check": "npm run lint && npm run typecheck && npm run build"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
