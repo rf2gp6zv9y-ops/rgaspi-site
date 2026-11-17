@@ -11,6 +11,7 @@ type NewsItem = {
   date: string;
   title: string;
   text: string;
+  shortText?: string;
   href: string;
   image?: string;
 };
@@ -88,19 +89,21 @@ export function HeroCarousel({ news, autoPlayInterval = 5000 }: HeroCarouselProp
                   {item.title}
                 </h2>
                 <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/80 sm:text-base">
-                  {item.text}
+                  {item.shortText || item.text}
                 </p>
-                <Button
-                  asChild
-                  size="lg"
-                  variant="outline"
-                  className="mt-6 border-white/30 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20 hover:text-white"
-                >
-                  <Link href={item.href}>
-                    Подробнее
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
+                {item.href !== "/void" && (
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    className="mt-6 border-white/30 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20 hover:text-white"
+                  >
+                    <Link href={item.href}>
+                      Подробнее
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                )}
               </div>
             </div>
           </div>

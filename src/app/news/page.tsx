@@ -53,13 +53,15 @@ export default function NewsPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="mt-auto">
-                <Link
-                  href={item.href}
-                  className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
-                >
-                  Подробнее
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
+                {item.href !== "/void" && (
+                  <Link
+                    href={item.href}
+                    className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
+                  >
+                    Подробнее
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                )}
               </CardContent>
             </Card>
           ))}
