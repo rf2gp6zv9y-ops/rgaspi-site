@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  /*
   async headers() {
     return [
       {
@@ -33,12 +34,14 @@ const nextConfig = {
         ],
       },
     ];
+    
   },
+  */
   images: {
     remotePatterns: [],
   },
   allowedDevOrigins: ['10.100.104.111', '10.100.121.237'],
-  
+
   output: 'export',            // Включает статический экспорт в папку out/
   basePath: '/rgaspi-site',    // Название вашего репозитория
   assetPrefix: '/rgaspi-site/', // Префикс для статики

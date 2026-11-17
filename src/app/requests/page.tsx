@@ -116,11 +116,13 @@ export default function RequestsPage() {
           </div>
           <Card id="feedback">
             <CardContent className="pt-6">
+              {/*
               <RequestForm
                 email={site.contacts.email}
                 defaultTopic="Замечание по прототипу сайта"
                 compact
               />
+              */}
             </CardContent>
           </Card>
         </div>
