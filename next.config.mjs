@@ -37,7 +37,7 @@ const nextConfig = {
   images: {
     remotePatterns: [],
   },
-  allowedDevOrigins: ['10.100.104.111'],
+  allowedDevOrigins: ['10.100.104.111', '10.100.121.237'],
 };
 
 export default nextConfig;

@@ -52,7 +52,7 @@ export default function HomePage() {
 
         </div>
         < div className="container pb-4 pt-2">
-        <HeroCarousel news={home.news} autoPlayInterval={6000} />
+        <HeroCarousel news={home.news.slice(0, 5)} autoPlayInterval={6000} />
         </div>
       </section>
       {/* Hero */}
