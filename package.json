@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "next dev -p 4000",
-    "build": "next build --webpack --loglevel=error",
+    "build": "next build --webpack",
     "start": "npx serve out",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
