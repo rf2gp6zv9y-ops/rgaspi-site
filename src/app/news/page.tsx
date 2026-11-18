@@ -34,7 +34,7 @@ export default function NewsPage() {
             <Card key={item.title} className="group flex flex-col overflow-hidden">
               <div className="relative aspect-[16/10]">
                 <Image
-                  src={item.image || "/images/hero.webp"}
+                  src={item.image || "/rgaspi-site/images/hero.webp"}
                   alt={item.title}
                   fill
                   className="object-cover transition-transform duration-300 group-hover:scale-105"

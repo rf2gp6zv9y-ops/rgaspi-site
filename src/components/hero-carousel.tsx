@@ -68,7 +68,7 @@ export function HeroCarousel({ news, autoPlayInterval = 5000 }: HeroCarouselProp
           {/* Background image */}
           <div className="absolute inset-0">
             <Image
-              src={item.image || "/images/hero.webp"}
+              src={`/rgaspi-site${item.image || "/images/hero.webp"}`}
               alt={item.title}
               fill
               sizes="(max-width: 1280px) 100vw, 1280px"
