@@ -68,12 +68,12 @@ export function HeroCarousel({ news, autoPlayInterval = 5000 }: HeroCarouselProp
           {/* Background image */}
           <div className="absolute inset-0">
             <Image
-              src={`/rgaspi-site${item.image || "/images/hero.webp"}`}
+              src={`${process.env.NODE_ENV === 'production' ? '/rgaspi-site' : ''}${item.image || "/images/hero.webp"}`}
               alt={item.title}
               fill
-              sizes="(max-width: 1280px) 100vw, 1280px"
+              sizes="100vw"
               className="object-cover"
-              priority={index === 0}
+              loading={index === 0 ? "eager" : "lazy"}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/10" />
           </div>
