@@ -44,7 +44,7 @@ const nextConfig = {
 
   output: 'export',            // Включает статический экспорт в папку out/
   basePath: '/rgaspi-site',    // Название вашего репозитория
-  assetPrefix: '/rgaspi-site/', // Префикс для статики
+  assetPrefix: '/rgaspi-site', // Префикс для статики
   images: {
     unoptimized: true,         // Отключает серверную оптимизацию картинок (обязательно для статики)
   },  
