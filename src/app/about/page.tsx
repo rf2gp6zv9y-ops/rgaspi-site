@@ -33,7 +33,7 @@ export default function AboutPage() {
 
           <div className="space-y-6">
             <Image
-              src="/images/documents.webp"
+              src="/rgaspi-site/images/documents.webp"
               alt="Архивные документы крупным планом"
               width={768}
               height={1024}
