@@ -12,7 +12,7 @@ export function Logo({ className }: { className?: string }) {
       )}
     >
       <img
-        src="/favicon.svg"
+        src="/rgaspi-site/favicon.svg"
         alt="РГАСПИ"
         className="-mt-4 h-20 w-20 shrink-0 transition-opacity group-hover:opacity-90"
       />
