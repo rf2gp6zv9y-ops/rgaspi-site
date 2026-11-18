@@ -34,9 +34,10 @@ export default function NewsPage() {
             <Card key={item.title} className="group flex flex-col overflow-hidden">
               <div className="relative aspect-[16/10]">
                 <Image
-                  src={item.image || "/rgaspi-site/images/hero.webp"}
+                  src={`${process.env.NODE_ENV === 'production' ? '/rgaspi-site' : ''}${item.image || "/images/hero.webp"}`}
                   alt={item.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover transition-transform duration-300 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
