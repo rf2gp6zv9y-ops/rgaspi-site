@@ -18,7 +18,7 @@ export default function AboutPage() {
   return (
     <>
       <PageHeader
-        kicker="О организации"
+        kicker="Об организации"
         title={about.title}
         intro={about.intro}
       />
